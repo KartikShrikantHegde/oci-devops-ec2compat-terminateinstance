@@ -35,7 +35,7 @@ class oci_sdk_actions:
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_id).data
 
-        for ad_ref in availability_domains:
+        for ad_ref in availability_domains['data']:
             logging.getLogger().info(str(ad_ref['name']))
 
         return "hi"
