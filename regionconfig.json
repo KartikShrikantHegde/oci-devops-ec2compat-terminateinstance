@@ -1,3 +1,7 @@
 {
-    "US East (Northern Virginia) Region":""
+    "US East (Northern Virginia) Region":{
+        "AD":"1",
+        "FD":"1"
+    }
+
 }
