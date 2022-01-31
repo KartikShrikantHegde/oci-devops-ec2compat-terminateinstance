@@ -36,7 +36,7 @@ class oci_sdk_actions:
             identity_client.list_availability_domains,oci_compartment_id).data
 
         for ad_ref in availability_domains['data']:
-            logging.getLogger().info(str(ad_ref['name']))
+            logging.getLogger().info("hell with")
 
         return "hi"
 
