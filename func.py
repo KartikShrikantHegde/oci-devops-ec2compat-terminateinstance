@@ -35,10 +35,11 @@ class oci_sdk_actions:
             identity_client.list_availability_domains,oci_compartment_id).data
         
         
-        for ad_name in availability_domains:
-            oci_ad_reference_from_list = 'AD'+ad_name['name'].split('AD')[-1]
-            if oci_ad_reference_from_list == oci_ad:
-                logging.getLogger().info("Ad will be used as " + str(ad_name['name']))
+        for ad_name in availability_domains['data']:
+            logging.getLogger().info("Ad will be used as " + str(ad_name['name']))
+            # oci_ad_reference_from_list = 'AD'+ad_name['name'].split('AD')[-1]
+            # if oci_ad_reference_from_list == oci_ad:
+            #     logging.getLogger().info("Ad will be used as " + str(ad_name['name']))
 
         
 
