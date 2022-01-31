@@ -34,7 +34,7 @@ class oci_sdk_actions:
         logging.getLogger().info("Doing pagination query")
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_id).data
-        logging.getLogger().info(str(availability_domains.keys()))
+        logging.getLogger().info(str(type(availability_domains)))
 
         
 
