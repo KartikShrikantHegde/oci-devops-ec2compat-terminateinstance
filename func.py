@@ -6,6 +6,7 @@
 
 import io
 import os
+import json
 import oci
 import logging
 
