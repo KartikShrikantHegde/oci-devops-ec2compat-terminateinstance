@@ -27,10 +27,11 @@ class oci_sdk_actions:
         self.signer = oci.auth.signers.get_resource_principals_signer()
 
     def fetch_ad(self,region_config,aws_region):
+        logging.getLogger().info("Inside fetch Ad info function")
         identity_client = oci.identity.IdentityClient(config={'region': self.region}, signer = self.signer)
         oci_compartment_id = region_config[aws_region]['oci_compartment_ocid']
         oci_ad = region_config[aws_region]['oci_ad']
-
+        logging.getLogger().info("Doing pagination query")
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_id).data
         
