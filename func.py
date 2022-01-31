@@ -33,7 +33,7 @@ class oci_sdk_actions:
         oci_ad = region_config[aws_region]['oci_ad']
         logging.getLogger().info("Doing pagination query")
         availability_domains = oci.pagination.list_call_get_all_results(
-            identity_client.list_availability_domains,oci_compartment_id).data
+            identity_client.list_availability_domains,oci_compartment_id)
 
         return availability_domains
         
