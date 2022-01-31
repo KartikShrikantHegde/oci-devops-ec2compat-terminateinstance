@@ -5,6 +5,7 @@
 #
 
 import io
+from operator import contains
 import os
 import json
 import oci
@@ -28,12 +29,18 @@ class oci_sdk_actions:
     def fetch_ad(self,region_config,aws_region):
         identity_client = oci.identity.IdentityClient(config={'region': self.region}, signer = self.signer)
         oci_compartment_id = region_config[aws_region]['oci_compartment_ocid']
+        oci_ad = region_config[aws_region]['oci_ad']
+
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_id).data
-        logging.getLogger().info("Ad informations" + str(availability_domains))
+        
+        
+        for ad_name in availability_domains['data']:
+            oci_ad_reference_from_list = 'AD'+ad_name['name'].split('AD')[-1]
+            if oci_ad_reference_from_list == oci_ad:
+                logging.getLogger().info("Ad will be used as " + ad_name['name'])
 
         
-
 
 def handler(ctx, data: io.BytesIO=None):
     try:
