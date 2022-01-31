@@ -38,7 +38,7 @@ class oci_sdk_actions:
         for ad_name in availability_domains['data']:
             oci_ad_reference_from_list = 'AD'+ad_name['name'].split('AD')[-1]
             if oci_ad_reference_from_list == oci_ad:
-                logging.getLogger().info("Ad will be used as " + ad_name['name'])
+                logging.getLogger().info("Ad will be used as " + str(ad_name['name']))
 
         
 
@@ -51,7 +51,7 @@ def handler(ctx, data: io.BytesIO=None):
         region_config =  read_from_json_file("/function/region_config.json")
         shape_config = read_from_json_file("/function/shape_config.json")
         image_config = read_from_json_file("/function/image_config.json")
-        subnet_config = read_from_json_file("/funcion/subnet_config.json")
+        subnet_config = read_from_json_file("/function/subnet_config.json")
 
         aws_region = body['Region']
         aws_image_id = body['image-id']
