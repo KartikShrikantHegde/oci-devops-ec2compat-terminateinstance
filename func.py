@@ -32,9 +32,9 @@ def handler(ctx, data: io.BytesIO=None):
         subnet_config = read_from_json_file("/funcion/subnet_config.json")
 
         aws_region = body['Region']
-        aws_image-id = body['image-id']
-        aws_instance-type = body['instance-type']
-        aws_subnet-id = body['subnet-id']
+        aws_image_id = body['image-id']
+        aws_instance_type = body['instance-type']
+        aws_subnet_id = body['subnet-id']
 
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
