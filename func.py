@@ -69,7 +69,7 @@ def handler(ctx, data: io.BytesIO=None):
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 
-            response_data=json.dumps({"status": oci_ad_name}),
+            response_data=json.dumps({"status": str(oci_ad_name)}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
