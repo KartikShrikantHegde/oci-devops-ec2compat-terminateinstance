@@ -19,7 +19,7 @@ def handler(ctx, data: io.BytesIO=None):
         logging.getLogger().info("Invoked function with default  image")
         json_file = open("/function/instanceconfig.json")
         ivar = json.load(json_file)
-        logging.getLogger().info("ivar"+ivar)
+        logging.getLogger().info("ivar"+str(ivar))
         return response.Response(
             ctx, 
             response_data=json.dumps({"status": "Hello World! with DefaultImage"}),
