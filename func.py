@@ -35,7 +35,7 @@ class oci_sdk_actions:
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_id).data
 
-        logging.getLogger().info(str(availability_domains))
+        return availability_domains
         
         
         # for ad_name in availability_domains['data']:
@@ -64,12 +64,12 @@ def handler(ctx, data: io.BytesIO=None):
 
         oci_region = region_config[aws_region]['oci_region']
         oci_sdk_handler = oci_sdk_actions(oci_region)
-        oci_sdk_handler.fetch_ad(region_config,aws_region)
+        oci_ad_name = oci_sdk_handler.fetch_ad(region_config,aws_region)
 
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 
-            response_data=json.dumps({"status": "Hello World! with DefaultImage"}),
+            response_data=json.dumps({"status": oci_ad_name}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
