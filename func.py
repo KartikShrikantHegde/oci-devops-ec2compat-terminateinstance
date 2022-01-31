@@ -27,6 +27,8 @@ def handler(ctx, data: io.BytesIO=None):
         logging.getLogger().info("Invoked function with default  image")
         instance_config = read_from_json_file("/function/instanceconfig.json")
         region_config =  read_from_json_file("/function/regionconfig.json")
+        aws_region = body['Region']
+        
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 

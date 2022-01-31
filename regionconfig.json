@@ -1,7 +1,16 @@
 {
     "US East (Northern Virginia) Region":{
-        "AD":"1",
-        "FD":"1"
+        "oci_region":"us-ashburn-1",
+        "oci_ad":"1",
+        "oci_fd":"1",
+        "oci_compartment_oci":"ocid1.compartment.oc1..aaaaaaaalbagydl2powatrvczfdfempy5z5j7g7kjm3gp6lkuk2odvvsrvdq"
+    },
+
+    "US Another Region":{
+        "oci_region":"us-ashburn-1",
+        "oci_ad":"1",
+        "oci_fd":"1",
+        "oci_compartment_oci":"ocid1.compartment.oc1..aaaaaaaalbagydl2powatrvczfdfempy5z5j7g7kjm3gp6lkuk2odvvsrvdq"
     }
 
 }

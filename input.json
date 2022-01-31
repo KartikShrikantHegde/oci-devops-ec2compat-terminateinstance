@@ -3,10 +3,10 @@
     "image-id":"",
     "instance-type":"",
     "subnet-id":"",
-     "security-group-ids":"",
-     "key-name":"",
-     "security-group-ids":"",
-      "tag-specifications":"",
-      "user-data":"",
-      "AssociatePublicIp":"Yes"
+    "security-group-ids":"",
+    "key-name":"",
+    "security-group-ids":"",
+    "tag-specifications":"",
+    "user-data":"",
+    "AssociatePublicIp":"Yes"
     }
