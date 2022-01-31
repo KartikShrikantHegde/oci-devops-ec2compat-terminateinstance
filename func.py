@@ -57,6 +57,8 @@ def handler(ctx, data: io.BytesIO=None):
         oci_region = region_config[aws_region]['oci_region']
         oci_sdk_handler = oci_sdk_actions(oci_region)
         ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
+        for i in ad:
+            logging.getLogger().info(str(i['name']))
 
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
