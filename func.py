@@ -17,7 +17,7 @@ def handler(ctx, data: io.BytesIO=None):
         body = json.loads(data.getvalue())
         logging.getLogger().info("inputs" + str(body))
         logging.getLogger().info("Invoked function with default  image")
-        json_file = open("instanceconfig.json")
+        json_file = open("/function/instanceconfig.json")
         ivar = json.load(json_file)
         logging.getLogger().info("ivar"+ivar)
         return response.Response(
