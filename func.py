@@ -27,8 +27,15 @@ def handler(ctx, data: io.BytesIO=None):
         logging.getLogger().info("Invoked function with default  image")
         instance_config = read_from_json_file("/function/instanceconfig.json")
         region_config =  read_from_json_file("/function/regionconfig.json")
+        shape_config = read_from_json_file("/function/shape_config.json")
+        image_config = read_from_json_file("/function/image_config.json")
+        subnet_config = read_from_json_file("/funcion/subnet_config.json")
+
         aws_region = body['Region']
-        
+        aws_image-id = body['image-id']
+        aws_instance-type = body['instance-type']
+        aws_subnet-id = body['subnet-id']
+
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 

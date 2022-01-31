@@ -1,8 +1,8 @@
 {
     "Region":"US East (Northern Virginia) Region", 
-    "image-id":"",
-    "instance-type":"",
-    "subnet-id":"",
+    "image-id":"ami-0abcdef1234567890",
+    "instance-type":"tr.micro",
+    "subnet-id":"subnet-08fc749671b2d077c",
     "security-group-ids":"",
     "key-name":"",
     "security-group-ids":"",
