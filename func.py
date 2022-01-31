@@ -35,19 +35,8 @@ class oci_sdk_actions:
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_id).data
 
-        for ad_ref in availability_domains['data']:
-            logging.getLogger().info("hell with")
-
-        return "hi"
-
-        
-        
-        # for ad_name in availability_domains['data']:
-        #     logging.getLogger().info(str(ad_name['name']))
-        #     # oci_ad_reference_from_list = 'AD'+ad_name['name'].split('AD')[-1]
-        #     # if oci_ad_reference_from_list == oci_ad:
-        #     #     logging.getLogger().info("Ad will be used as " + str(ad_name['name']))
-
+        logging.getLogger().info(str(availability_domains))
+     
         
 
 def handler(ctx, data: io.BytesIO=None):
@@ -68,7 +57,7 @@ def handler(ctx, data: io.BytesIO=None):
 
         oci_region = region_config[aws_region]['oci_region']
         oci_sdk_handler = oci_sdk_actions(oci_region)
-        oci_ad_name = oci_sdk_handler.fetch_ad(region_config,aws_region)
+        oci_sdk_handler.fetch_ad(region_config,aws_region)
 
         logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
