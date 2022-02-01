@@ -6,7 +6,7 @@
         "oci_compartment_ocid":"ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha"
     },
 
-    "US Another Region":{
+    "us-east-2":{
         "oci_region":"us-ashburn-1",
         "oci_ad":"1",
         "oci_fd":"1",
