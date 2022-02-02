@@ -42,7 +42,7 @@ class oci_sdk_actions:
             image_id="ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca"
 
             )
-            logging.getLogger().info(str(launch_instance_response.data))
+        logging.getLogger().info(str(launch_instance_response.data))
 
 
 
