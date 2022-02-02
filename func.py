@@ -31,6 +31,7 @@ class oci_sdk_actions:
         # Initialize service client with default config file
         core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
         launch_instance_response = core_client.launch_instance(
+            launch_instance_details=oci.core.models.LaunchInstanceDetails(
             availability_domain="Qhab:PHX-AD-1",
             compartment_id="ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha",
             shape="VM.Standard2.8",
@@ -41,7 +42,7 @@ class oci_sdk_actions:
             ),
             image_id="ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca"
 
-            )
+            ))
         logging.getLogger().info(str(launch_instance_response.data))
 
 
