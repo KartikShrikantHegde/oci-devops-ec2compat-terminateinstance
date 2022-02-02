@@ -34,7 +34,7 @@ class oci_sdk_actions:
             launch_instance_details=oci.core.models.LaunchInstanceDetails(
             availability_domain="Qhab:PHX-AD-1",
             compartment_id="ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha",
-            shape="VM.Standard2.16",
+            shape="VM.Standard2.1",
             create_vnic_details=oci.core.models.CreateVnicDetails(
                 assign_public_ip=True,
                 subnet_id="ocid1.subnet.oc1.phx.aaaaaaaa5t6wyuvglpzdw3rm6mvtgnjupv22edbxzacra7djem7asv2eufgq"
