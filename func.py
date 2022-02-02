@@ -27,23 +27,27 @@ class oci_sdk_actions:
         self.signer = oci.auth.signers.get_resource_principals_signer()
 
     def launch_instance(self):
-        logging.getLogger().info("inside launch compute function")
-        # Initialize service client with default config file
-        core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
-        launch_instance_response = core_client.launch_instance(
-            launch_instance_details=oci.core.models.LaunchInstanceDetails(
-            availability_domain="Qhab:PHX-AD-1",
-            compartment_id="ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha",
-            shape="VM.Standard2.1",
-            create_vnic_details=oci.core.models.CreateVnicDetails(
-                assign_public_ip=True,
-                subnet_id="ocid1.subnet.oc1.phx.aaaaaaaa5t6wyuvglpzdw3rm6mvtgnjupv22edbxzacra7djem7asv2eufgq"
+        try:
+    
+            logging.getLogger().info("inside launch compute function")
+            # Initialize service client with default config file
+            core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
+            launch_instance_response = core_client.launch_instance(
+                launch_instance_details=oci.core.models.LaunchInstanceDetails(
+                availability_domain="Qhab:PHX-AD-1",
+                compartment_id="ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha",
+                shape="VM.Standard2.1",
+                create_vnic_details=oci.core.models.CreateVnicDetails(
+                    assign_public_ip=True,
+                    subnet_id="ocid1.subnet.oc1.phx.aaaaaaaa5t6wyuvglpzdw3rm6mvtgnjupv22edbxzacra7djem7asv2eufgq"
 
-            ),
-            image_id="ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca"
+                ),
+                image_id="ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca"
 
-            ))
-        logging.getLogger().info(str(launch_instance_response.data))
+                ))
+            return launch_instance_response
+        except Exception as error:
+            logging.getLogger().info("Error while launching the instance" + str(error))
 
 
 
@@ -77,7 +81,7 @@ def handler(ctx, data: io.BytesIO=None):
 
         oci_region = 'us-phoenix-1' #Eventually this will come from the compat endpoint handeler 
         oci_sdk_handler = oci_sdk_actions(oci_region)
-        oci_sdk_handler.launch_instance()
+        instance_creation_response = oci_sdk_handler.launch_instance()
         # ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
         # for i in ad:
         #     logging.getLogger().info(str(i['name']))
@@ -85,7 +89,7 @@ def handler(ctx, data: io.BytesIO=None):
         # logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 
-            response_data=json.dumps({"status": "you are inside oci"}),
+            response_data=json.dumps({"output": str(instance_creation_response.data)}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
