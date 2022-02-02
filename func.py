@@ -21,26 +21,26 @@ def read_from_json_file(path):
         logging.getLogger().error("Exception while reading json file" + str(error))
 
 
-class oci_sdk_actions:
-    def __init__(self,region):
-        self.region = region
-        self.signer = oci.auth.signers.get_resource_principals_signer()
+# class oci_sdk_actions:
+#     def __init__(self,region):
+#         self.region = region
+#         self.signer = oci.auth.signers.get_resource_principals_signer()
 
-    def fetch_ad(self,region_config,aws_region):
-        logging.getLogger().info("Inside fetch Ad info function")
-        identity_client = oci.identity.IdentityClient(config={'region': self.region}, signer = self.signer)
-        oci_compartment_id = region_config[aws_region]['oci_compartment_ocid']
-        oci_ad = region_config[aws_region]['oci_ad']
-        logging.getLogger().info("Doing pagination query")
-        availability_domains = oci.pagination.list_call_get_all_results(
-            identity_client.list_availability_domains,oci_compartment_id).data
-        return availability_domains 
+#     def fetch_ad(self,region_config,aws_region):
+#         logging.getLogger().info("Inside fetch Ad info function")
+#         identity_client = oci.identity.IdentityClient(config={'region': self.region}, signer = self.signer)
+#         oci_compartment_id = region_config[aws_region]['oci_compartment_ocid']
+#         oci_ad = region_config[aws_region]['oci_ad']
+#         logging.getLogger().info("Doing pagination query")
+#         availability_domains = oci.pagination.list_call_get_all_results(
+#             identity_client.list_availability_domains,oci_compartment_id).data
+#         return availability_domains 
 
         
 
 def handler(ctx, data: io.BytesIO=None):
     try:
-        body = json.loads(data.getvalue())
+        body = str(str(data.getvalue()))
         logging.getLogger().info("inputs" + str(body))
         logging.getLogger().info("Invoked function with default  image")
         instance_config = read_from_json_file("/function/instance_config.json")
@@ -49,21 +49,20 @@ def handler(ctx, data: io.BytesIO=None):
         image_config = read_from_json_file("/function/image_config.json")
         subnet_config = read_from_json_file("/function/subnet_config.json")
 
-        aws_region = body['Region']
-        aws_image_id = body['image-id']
-        aws_instance_type = body['instance-type']
-        aws_subnet_id = body['subnet-id']
+        aws_image_id = body.split('ImageId=')[1].split('&')[0]
+        aws_subnet_id = body.split('SubnetId=')[1].split('&')[0]
+        logging.getLogger().info('subnet is ' + str(aws_subnet_id))
 
-        oci_region = region_config[aws_region]['oci_region']
-        oci_sdk_handler = oci_sdk_actions(oci_region)
-        ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
-        for i in ad:
-            logging.getLogger().info(str(i['name']))
+        # oci_region = region_config[aws_region]['oci_region']
+        # oci_sdk_handler = oci_sdk_actions(oci_region)
+        # ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
+        # for i in ad:
+        #     logging.getLogger().info(str(i['name']))
 
-        logging.getLogger().info("ivar"+str(region_config))
+        # logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 
-            response_data=json.dumps({"status": str(ad[1])}),
+            response_data=json.dumps({"status": "you are inside oci"}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
