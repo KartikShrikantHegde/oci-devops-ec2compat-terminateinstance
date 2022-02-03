@@ -26,7 +26,7 @@ class oci_sdk_actions:
         self.region = region
         self.signer = oci.auth.signers.get_resource_principals_signer()
 
-    def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid):
+    def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name):
         try:
             associate_public_ip_for_oci=True
             logging.getLogger().info("inside launch compute function")
@@ -34,7 +34,7 @@ class oci_sdk_actions:
             core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
             launch_instance_response = core_client.launch_instance(
                 launch_instance_details=oci.core.models.LaunchInstanceDetails(
-                availability_domain="Qhab:PHX-AD-1", # This will be dynamically fetch from fetch ad function.
+                availability_domain=oci_ad_name, # This will be dynamically fetch from fetch ad function.
                 compartment_id=oci_compartment_ocid, # This will be  from a map 
                 shape=oci_instance_shape,
                 create_vnic_details=oci.core.models.CreateVnicDetails(
@@ -84,12 +84,14 @@ def handler(ctx, data: io.BytesIO=None):
         oci_subnet_id = subnet_config[aws_subnet_id]
         oci_image_id = image_config[aws_image_id]
         oci_compartment_ocid = region_config[aws_region]['oci_compartment_ocid']
+        oci_instance_ad_count = int(region_config[aws_region]['oci_ad'].split('-')[-1]) -1
 
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
         ad_info=oci_sdk_handler.fetch_ad(oci_compartment_ocid,aws_region)
-        logging.getLogger().info(str(ad_info))
-        instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid)
+        oci_ad_name = ad_info[oci_instance_ad_count]['name']
+        logging.getLogger().info("Proceeding with AD name as " + str(oci_ad_name))
+        instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name)
         return response.Response(
             ctx, 
             response_data=json.dumps({"output": str(instance_creation_response.data)}),
