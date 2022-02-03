@@ -66,7 +66,6 @@ class oci_sdk_actions:
 
 def handler(ctx, data: io.BytesIO=None):
     try:
-        logging.getLogger().info("cts" + str(ctx.getvalue()))
         body = str(str(data.getvalue()))
         logging.getLogger().info("inputs" + str(body))
         logging.getLogger().info("Invoked function with default  image")
@@ -82,11 +81,12 @@ def handler(ctx, data: io.BytesIO=None):
         logging.getLogger().info('subnet is ' + str(aws_subnet_id))
 
         oci_region = 'us-phoenix-1' #Eventually this will come from the compat endpoint handeler 
+        aws_region = 'us-east-1' #Eventually get this from AWS Endpoint context value 
 
         oci_instance_shape = shape_config[aws_shape_name]
         oci_subnet_id = subnet_config[aws_subnet_id]
         oci_image_id = image_config[aws_image_id]
-        oci_compartment_ocid = region_config[oci_region]['oci_compartment_ocid']
+        oci_compartment_ocid = region_config[aws_region]['oci_compartment_ocid']
 
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
