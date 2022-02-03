@@ -50,17 +50,13 @@ class oci_sdk_actions:
             logging.getLogger().info("Error while launching the instance" + str(error))
 
 
-
-
-#     def fetch_ad(self,region_config,aws_region):
-#         logging.getLogger().info("Inside fetch Ad info function")
-#         identity_client = oci.identity.IdentityClient(config={'region': self.region}, signer = self.signer)
-#         oci_compartment_id = region_config[aws_region]['oci_compartment_ocid']
-#         oci_ad = region_config[aws_region]['oci_ad']
-#         logging.getLogger().info("Doing pagination query")
-#         availability_domains = oci.pagination.list_call_get_all_results(
-#             identity_client.list_availability_domains,oci_compartment_id).data
-#         return availability_domains 
+    def fetch_ad(self,oci_compartment_ocid,aws_region):
+        logging.getLogger().info("Inside fetch Ad info function")
+        identity_client = oci.identity.IdentityClient(config={'region': self.region}, signer = self.signer)
+        logging.getLogger().info("Doing pagination query")
+        availability_domains = oci.pagination.list_call_get_all_results(
+            identity_client.list_availability_domains,oci_compartment_ocid).data
+        return availability_domains 
 
         
 
@@ -91,12 +87,9 @@ def handler(ctx, data: io.BytesIO=None):
 
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
+        ad_info=oci_sdk_handler.fetch_ad(oci_compartment_ocid,aws_region)
+        logging.getLogger().info(str(ad_info))
         instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid)
-        # ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
-        # for i in ad:
-        #     logging.getLogger().info(str(i['name']))
-
-        # logging.getLogger().info("ivar"+str(region_config))
         return response.Response(
             ctx, 
             response_data=json.dumps({"output": str(instance_creation_response.data)}),
