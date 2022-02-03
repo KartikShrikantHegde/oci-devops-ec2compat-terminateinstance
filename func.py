@@ -85,7 +85,7 @@ def handler(ctx, data: io.BytesIO=None):
         oci_instance_shape = shape_config[aws_shape_name]
         oci_subnet_id = subnet_config[aws_subnet_id]
         oci_image_id = image_config[aws_image_id]
-        oci_compartment_ocid = region_config[oci_region][oci_compartment_ocid]
+        oci_compartment_ocid = region_config[oci_region]['oci_compartment_ocid']
 
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
