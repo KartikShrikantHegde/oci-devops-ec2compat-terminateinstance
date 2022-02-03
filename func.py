@@ -91,7 +91,7 @@ def handler(ctx, data: io.BytesIO=None):
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
         ad_info=oci_sdk_handler.fetch_ad(oci_compartment_ocid,aws_region)
-        oci_ad_name = ad_info['data'][oci_instance_ad_count]['name']
+        oci_ad_name = ad_info['data'][0]['name']
         logging.getLogger().info("Proceeding with AD name as " + str(oci_ad_name))
         instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name)
         return response.Response(
