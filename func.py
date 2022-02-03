@@ -26,11 +26,9 @@ class oci_sdk_actions:
         self.region = region
         self.signer = oci.auth.signers.get_resource_principals_signer()
 
-    def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,aws_public_ip):
+    def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid):
         try:
             associate_public_ip_for_oci=True
-            if aws_public_ip == "false":
-                associate_public_ip_for_oci=False
             logging.getLogger().info("inside launch compute function")
             # Initialize service client with default config file
             core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
@@ -80,7 +78,7 @@ def handler(ctx, data: io.BytesIO=None):
         aws_image_id = body.split('ImageId=')[1].split('&')[0]
         aws_subnet_id = body.split('SubnetId=')[1].split('&')[0]
         aws_shape_name = body.split('InstanceType=')[1].split('&')[0]
-        aws_public_ip = body.split('AssociatePublicIpAddress=')[1].split('&')[0]
+       
         logging.getLogger().info('subnet is ' + str(aws_subnet_id))
 
         oci_region = 'us-phoenix-1' #Eventually this will come from the compat endpoint handeler 
@@ -93,7 +91,7 @@ def handler(ctx, data: io.BytesIO=None):
 
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
-        instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,aws_public_ip)
+        instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid)
         # ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
         # for i in ad:
         #     logging.getLogger().info(str(i['name']))
