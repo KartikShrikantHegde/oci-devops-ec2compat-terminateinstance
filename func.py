@@ -58,7 +58,7 @@ class oci_sdk_actions:
             identity_client.list_availability_domains,oci_compartment_ocid).data
 
         logging.getLogger().info("Ad info" + str(availability_domains))
-        logging.getLogger.info(str(type(availability_domains)))
+        logging.getLogger().info(str(type(availability_domains)))
         return availability_domains 
 
         
