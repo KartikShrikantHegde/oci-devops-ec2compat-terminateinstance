@@ -26,7 +26,7 @@ class oci_sdk_actions:
         self.region = region
         self.signer = oci.auth.signers.get_resource_principals_signer()
 
-    def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id):
+    def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid):
         try:
     
             logging.getLogger().info("inside launch compute function")
@@ -35,7 +35,7 @@ class oci_sdk_actions:
             launch_instance_response = core_client.launch_instance(
                 launch_instance_details=oci.core.models.LaunchInstanceDetails(
                 availability_domain="Qhab:PHX-AD-1", # This will be dynamically fetch from fetch ad function.
-                compartment_id="ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha", # This will be  from a map 
+                compartment_id=oci_compartment_ocid, # This will be  from a map 
                 shape=oci_instance_shape,
                 create_vnic_details=oci.core.models.CreateVnicDetails(
                     assign_public_ip=True,
@@ -80,13 +80,16 @@ def handler(ctx, data: io.BytesIO=None):
         aws_shape_name = body.split('InstanceType=')[1].split('&')[0]
         logging.getLogger().info('subnet is ' + str(aws_subnet_id))
 
+        oci_region = 'us-phoenix-1' #Eventually this will come from the compat endpoint handeler 
+
         oci_instance_shape = shape_config[aws_shape_name]
         oci_subnet_id = subnet_config[aws_subnet_id]
         oci_image_id = image_config[aws_image_id]
+        oci_compartment_ocid = region_config[oci_region][oci_compartment_ocid]
 
-        oci_region = 'us-phoenix-1' #Eventually this will come from the compat endpoint handeler 
+        
         oci_sdk_handler = oci_sdk_actions(oci_region)
-        instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id)
+        instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid)
         # ad=oci_sdk_handler.fetch_ad(region_config,aws_region)
         # for i in ad:
         #     logging.getLogger().info(str(i['name']))
