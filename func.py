@@ -66,6 +66,7 @@ class oci_sdk_actions:
 
 def handler(ctx, data: io.BytesIO=None):
     try:
+        logging.getLogger().info("cts" + str(ctx))
         body = str(str(data.getvalue()))
         logging.getLogger().info("inputs" + str(body))
         logging.getLogger().info("Invoked function with default  image")
