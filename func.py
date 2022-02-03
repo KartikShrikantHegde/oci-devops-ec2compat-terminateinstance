@@ -57,8 +57,6 @@ class oci_sdk_actions:
         availability_domains = oci.pagination.list_call_get_all_results(
             identity_client.list_availability_domains,oci_compartment_ocid).data
 
-        logging.getLogger().info("Ad info" + str(availability_domains))
-        logging.getLogger().info(str(type(availability_domains)))
         return availability_domains 
 
         
@@ -91,7 +89,7 @@ def handler(ctx, data: io.BytesIO=None):
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
         ad_info=oci_sdk_handler.fetch_ad(oci_compartment_ocid,aws_region)
-        logging.getLogger().info("Proceeding with AD info of zero" + str(ad_info[0]))
+        logging.getLogger().info("Proceeding with AD info of zero" + str(ad_info[0]['name']))
         oci_ad_name='Qhab:PHX-AD-1' #This will be from the map,token.
         instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name)
         return response.Response(
