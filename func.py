@@ -31,7 +31,7 @@ class oci_sdk_actions:
     def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name):
         try:
             associate_public_ip_for_oci=True
-            name_random = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(17))
+            name_random = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(17)).lower()
             oci_instance_display_name = f'i-{name_random}'
             logging.getLogger().info("inside launch compute function")
             # Initialize service client with default config file
