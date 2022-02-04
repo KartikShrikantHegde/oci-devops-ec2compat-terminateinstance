@@ -37,6 +37,7 @@ class oci_sdk_actions:
                 availability_domain=oci_ad_name, # This will be dynamically fetch from fetch ad function.
                 compartment_id=oci_compartment_ocid, # This will be  from a map 
                 shape=oci_instance_shape,
+                display_name="ab342insstances",
                 create_vnic_details=oci.core.models.CreateVnicDetails(
                     assign_public_ip=associate_public_ip_for_oci,
                     subnet_id=oci_subnet_id
