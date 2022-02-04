@@ -10,6 +10,7 @@ import os
 import json
 import oci
 import logging
+import uuid
 
 from fdk import response
 
@@ -29,6 +30,7 @@ class oci_sdk_actions:
     def launch_instance(self,oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name):
         try:
             associate_public_ip_for_oci=True
+            oci_instance_display_name = f'i-{uuid.uuid4().hex.lower()[0:17]}'
             logging.getLogger().info("inside launch compute function")
             # Initialize service client with default config file
             core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
@@ -37,7 +39,7 @@ class oci_sdk_actions:
                 availability_domain=oci_ad_name, # This will be dynamically fetch from fetch ad function.
                 compartment_id=oci_compartment_ocid, # This will be  from a map 
                 shape=oci_instance_shape,
-                display_name="ab342insstances",
+                display_name=oci_instance_display_name,
                 create_vnic_details=oci.core.models.CreateVnicDetails(
                     assign_public_ip=associate_public_ip_for_oci,
                     subnet_id=oci_subnet_id

@@ -1,3 +1,4 @@
 fdk
 oci
 oci-cli
+uuid
