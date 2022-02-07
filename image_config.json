@@ -1,4 +1,5 @@
 {
     "ami-0abcdef1234567890":"ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca",
-    "ami-0a8b4cd432b1c3063":"ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca"
+    "ami-0a8b4cd432b1c3063":"ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca",
+    "ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca":"ocid1.image.oc1.phx.aaaaaaaaqpk3kgliqneamdnkslngae5x22xf43xqglu6ijrxl32wx3noxtca"
 }
