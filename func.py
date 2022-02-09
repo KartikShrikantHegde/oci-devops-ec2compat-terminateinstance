@@ -15,12 +15,12 @@ import string
 
 from fdk import response
 
-# def read_from_json_file(path):
-#     try:
-#         json_file = open(path)
-#         return (json.load(json_file))
-#     except Exception as error:
-#         logging.getLogger().error("Exception while reading json file" + str(error))
+def read_from_json_file(path):
+    try:
+        json_file = open(path)
+        return (json.load(json_file))
+    except Exception as error:
+        logging.getLogger().error("Exception while reading json file" + str(error))
 
 
 class oci_sdk_actions:
