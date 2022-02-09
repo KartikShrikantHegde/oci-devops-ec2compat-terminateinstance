@@ -33,7 +33,7 @@ class oci_sdk_actions:
             core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
             number_of_instance_ids = input.lower().count('instanceid')
             if number_of_instance_ids != 1:
-                return "Sorry in demo we can take only 1 ID"
+                return "Sorry in demo we can take only one  instace OCID"
             oci_instance_id = input.split('InstanceId.1')[1].split('&')[0].split('=')[1]
             get_instance_response = core_client.get_instance(
                 instance_id=oci_instance_id)
@@ -42,6 +42,8 @@ class oci_sdk_actions:
 
         except Exception as error:
             logging.getLogger().info("Error while launching the instance" + str(error))
+            return error
+            
 
 
 
