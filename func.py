@@ -68,8 +68,7 @@ from fdk import response
 
 def handler(ctx, data: io.BytesIO=None):
     try:
-        #body = str(str(data.getvalue()))
-        body = json.loads(data.getvalue())
+        body = str(str(data.getvalue()))
         logging.getLogger().info("inputs" + str(body))
         # logging.getLogger().info("Invoked function with default  image")
         # instance_config = read_from_json_file("/function/instance_config.json")
