@@ -34,7 +34,7 @@ class oci_sdk_actions:
             number_of_instance_ids = input.lower().count('instanceid')
             if number_of_instance_ids != 1:
                 return "Sorry in demo we can take only one  instace OCID"
-            oci_instance_id = input.split('InstanceId.1')[1].split('&')[0].split('=')[1]
+            oci_instance_id = input.split('InstanceId.1')[1].split('&')[0].split('=')[1][:-1]
             logging.getLogger().info("Proceeding with OCID " + oci_instance_id)
             get_instance_response = core_client.get_instance(
                 instance_id=oci_instance_id)
