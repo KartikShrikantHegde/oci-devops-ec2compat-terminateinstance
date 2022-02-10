@@ -42,7 +42,7 @@ class oci_sdk_actions:
             get_instance_response = core_client.list_instances(compartment_id=oci_compartment_ocid)
             logging.getLogger().info("Listinstance value" +str(get_instance_response.data))
                 
-            return get_instance_response.data 
+            return get_instance_response
     
 
         except Exception as error:
@@ -79,7 +79,7 @@ def handler(ctx, data: io.BytesIO=None):
         # instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name)
         return response.Response(
             ctx, 
-            response_data=json.dumps({"output": describe_instance_response}),
+            response_data=json.dumps({"output": describe_instance_response.data}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
