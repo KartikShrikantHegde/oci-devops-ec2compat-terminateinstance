@@ -28,7 +28,7 @@ class oci_sdk_actions:
         self.region = region
         self.signer = oci.auth.signers.get_resource_principals_signer()
 
-    def describe_instances(self,oci_compartment_ocid,input):
+    def terminate_instances(self,oci_compartment_ocid,input):
         try:
             core_client = oci.core.ComputeClient(config={'region': self.region}, signer = self.signer)
             number_of_instance_ids = input.lower().count('instanceid')
@@ -37,14 +37,14 @@ class oci_sdk_actions:
             oci_instance_id = input.split('InstanceId.1')[1].split('&')[0].split('=')[1][:-1]
             logging.getLogger().info("Proceeding with OCID " + oci_instance_id)
             logging.getLogger().info("Compartment id " + oci_compartment_ocid )
-            get_instance_response = core_client.get_instance(instance_id=oci_instance_id)
-            logging.getLogger().info("Listinstance value" +str(get_instance_response.data))
+            terminate_instance_response = core_client.terminate_instance(instance_id=oci_instance_id)
+            logging.getLogger().info("Terminated details" +str(terminate_instance_response.data))
                 
-            return get_instance_response
+            return terminate_instance_response
     
 
         except Exception as error:
-            logging.getLogger().info("Error while launching the instance" + str(error))
+            logging.getLogger().info("Error while terminating the instance" + str(error))
             return error
             
 
@@ -72,12 +72,12 @@ def handler(ctx, data: io.BytesIO=None):
         oci_compartment_ocid = region_config[aws_region]['oci_compartment_ocid']
         
         oci_sdk_handler = oci_sdk_actions(oci_region)
-        describe_instance_response = oci_sdk_handler.describe_instances(oci_compartment_ocid,body)
+        terminate_instance_response = oci_sdk_handler.terminate_instances(oci_compartment_ocid,body)
     
         # instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name)
         return response.Response(
             ctx, 
-            response_data=json.dumps({"output": str(describe_instance_response.data)}),
+            response_data=json.dumps({"output": str(terminate_instance_response.data)}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
