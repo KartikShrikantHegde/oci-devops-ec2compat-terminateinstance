@@ -36,9 +36,11 @@ class oci_sdk_actions:
                 return "Sorry in demo we can take only one  instace OCID"
             oci_instance_id = input.split('InstanceId.1')[1].split('&')[0].split('=')[1][:-1]
             logging.getLogger().info("Proceeding with OCID " + oci_instance_id)
+            logging.getLogger().info("Compartment id " + oci_compartment_ocid )
             # Its a temporary to use list instead of get until we finish the bug 
             # - https://github.com/oracle/oci-python-sdk/issues/430
             get_instance_response = core_client.list_instances(compartment_id=oci_compartment_ocid)
+            logging.getLogger().info("Listinstance value" +str(get_instance_response.data))
                 
             return get_instance_response.data 
     
