@@ -79,7 +79,7 @@ def handler(ctx, data: io.BytesIO=None):
         # instance_creation_response = oci_sdk_handler.launch_instance(oci_instance_shape,oci_subnet_id,oci_image_id,oci_compartment_ocid,oci_ad_name)
         return response.Response(
             ctx, 
-            response_data=json.dumps({"output": describe_instance_response.data}),
+            response_data=json.dumps({"output": str(describe_instance_response.data)}),
             headers={"Content-Type": "application/json"})
     except Exception as error:
         logging.getLogger().error("Exception" + str(error))
