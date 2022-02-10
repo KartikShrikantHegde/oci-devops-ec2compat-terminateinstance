@@ -1,11 +1,11 @@
-Sample illustration of AWS EC2 get  instance details wtih a  compatibility endpoint .
+Sample illustration of AWS EC2  terminate  instance details wtih a  compatibility endpoint .
 -------
 
 Objective (Its for an internal demo)
 
 ----
 
-- Get the details of an incident from OCI using AWS CLI
+- Terminate an incident from OCI using AWS CLI
 
 
 Setup
@@ -31,7 +31,7 @@ aws configure (Update the AWS credentials as created via OCI )
 ```
 
 ```
- aws ec2 describe-instances --instance-ids  ocid1.instance.oc1.phx.xxxx --endpoint-url https://xxx.apigateway.us-phoenix-1.oci.customer-oci.com/v2/DescribeInstances  --output json --profile <AWS Profile>
+aws ec2 describe-instances  --endpoint-url https://xxxx.apigateway.us-phoenix-1.oci.customer-oci.com/v2/TerminateInstances --output json --profile oci --instance-ids ocid1.instance.oc1.phx.xxxx
 ```
 Its Just for a demo purpose .
 
