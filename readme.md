@@ -1,11 +1,11 @@
-Sample illustration of AWS EC2 Launch instance compatibility with OCI .
+Sample illustration of AWS EC2 get  instance details wtih a  compatibility endpoint .
 -------
 
 Objective (Its for an internal demo)
 
 ----
 
-- Launch an AWS EC2 CLI with LaunchInstance option and redirect the same to OCI and create a compute instance 
+- Get the details of an incident from OCI using AWS CLI
 
 
 Setup
@@ -31,7 +31,7 @@ aws configure (Update the AWS credentials as created via OCI )
 ```
 
 ```
-aws ec2 run-instances --image-id ami-xxxx --count 1 --instance-type <VM Type from your shapeconfig file>  --subnet-id subnet-XXXX --endpoint-url https://xxxx.apigateway.<oci_region>.oci.customer-oci.com/v1/RunInstances  --output json --profile <AWS Profile>
+ aws ec2 describe-instances --instance-ids  ocid1.instance.oc1.phx.xxxx --endpoint-url https://xxx.apigateway.us-phoenix-1.oci.customer-oci.com/v2/DescribeInstances  --output json --profile <AWS Profile>
 ```
 Its Just for a demo purpose .
 
