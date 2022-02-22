@@ -3,14 +3,13 @@
         "oci_region":"us-phoenix-1",
         "oci_ad":"AD-1",
         "oci_fd":"FD-1",
-        "oci_compartment_ocid":"ocid1.compartment.oc1..aaaaaaaaievlqkktpe5yumlanr64gnzgi2vokbhrsuz2sddcjooewbqqj5ha"
+        "oci_compartment_ocid":"ocid1.tenancy.oc1..aaaaaaaajznex5attydtrmrgudwayqu7kn4krasw2ct4h4pwz7nwbfxoyd4q"
     },
 
     "us-east-2":{
         "oci_region":"us-ashburn-1",
-        "oci_ad":"AD-2",
-        "oci_fd":"FD-1",
-        "oci_compartment_ocid":"ocid1.compartment.oc1..aaaaaaaalbagydl2powatrvczfdfempy5z5j7g7kjm3gp6lkuk2odvvsrvdq"
+        "oci_ad":"AD-1",
+        "oci_fd":"FD-2",
+        "oci_compartment_ocid":"ocid1.compartment.oc1..aaaaaaaa7xoyel7zcjk5eumgoizj6vnpeel7qhv3mkrcduvi7pxev6cnhdfa"
     }
-
 }
