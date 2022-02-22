@@ -65,7 +65,7 @@ def handler(ctx, data: io.BytesIO=None):
        
         # logging.getLogger().info('subnet is ' + str(aws_subnet_id))
 
-        oci_region = 'us-phoenix-1' #Eventually this will come from the compat endpoint handeler 
+        oci_region = 'us-ashburn-1' #Eventually this will come from the compat endpoint handeler 
         aws_region = 'us-east-1' #Eventually get this from AWS Endpoint context value 
 
     
