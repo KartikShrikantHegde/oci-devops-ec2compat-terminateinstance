@@ -6,4 +6,4 @@ entrypoint: /python/bin/fdk /function/func.py handler
 memory: 512
 timeout: 300
 config:
-  oci_region: eu-frankfurt-1
+  oci_region: us-ashburn-1
